@@ -1,0 +1,47 @@
+.dashboard .sidebar-container {
+  z-index: 999;
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.dashboard .sidebar {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: auto;
+  width: 290px;
+  max-width: calc(100% - 40px);
+  height: 100vh;
+  background-color: red;
+}
+@media(max-width: 991px) {
+  .dashboard .sidebar-container {
+    z-index: 999;
+    position: absolute;
+    background-color: rgba(0,0,0,0);
+    pointer-events: none;
+    width: 100%;
+    height: calc(100vh - 50px);
+    top: 50px;
+    transition: background-color 250ms ease;
+  }
+  .dashboard.sidebar-active .sidebar-container {
+    background-color: rgba(0,0,0,0.5);
+    pointer-events: all;
+    transition: background-color 250ms ease;
+  }
+  .dashboard .sidebar {
+    height: calc(100vh - 50px);
+    left: -100%;
+    right: auto;
+    transition: left 250ms ease;
+  }
+  .dashboard.sidebar-active .sidebar {
+    left: 0;
+    transition: left 250ms ease;
+  }
+}

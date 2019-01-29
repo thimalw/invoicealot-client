@@ -1,0 +1,17 @@
+.dashboard {
+  min-width: 200px;
+  position: relative;
+}
+.dashboard .dashboard-body {
+  position: relative;
+  top: 60px;
+  left: 290px;
+  width: calc(100% - 290px);
+}
+@media(max-width: 991px) {
+  .dashboard .dashboard-body {
+    top: 50px;
+    left: 0;
+    width: 100%;
+  }
+}

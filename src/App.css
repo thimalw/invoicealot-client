@@ -1,32 +1,91 @@
-.App {
-  text-align: center;
+a,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+  outline: none !important;
+}
+a:focus,
+a:active {
+  text-decoration: underline;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* buttons */
+.btn {
+  border: 1px solid;
+  font-size: 14px;
+  height: 34px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-radius: 17px;
+  text-align: center;
+  text-decoration: none !important;
+  background-color: transparent;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 currentColor;
+  transition: box-shadow 200ms linear;
+  outline: none !important;
+}
+.btn:hover,
+.btn:active,
+.btn:focus {
+  box-shadow: 0 6px 24px -12px currentColor;
+  transition: box-shadow 100ms linear;
+}
+.btn svg {
+  display: inline-block;
+  margin-right: 10px;
+}
+.btn-row .btn {
+  border-radius: 0;
+}
+.btn-row .btn + .btn {
+  margin-left: 6px;
+}
+.btn-row .btn:first-child {
+  border-radius: 17px 0 0 17px;
+}
+.btn-row .btn:last-child {
+  border-radius: 0 17px 17px 0;
+}
+.btn-dual {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  position: relative;
+}
+.btn-dual .btn {
+  width: calc(50% - 3px);
 }
 
-.App-link {
-  color: #61dafb;
+/* button colors */
+.btn-primary {
+  border-color: #000;
+  color: #000 !important;
+}
+.btn-secondary {
+  border-color: #888888;
+  color: #888888 !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* alerts */
+.alert {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.alert-danger {
+  background-color: #ff426c;
+  color: #fff;
+}
+
+/* toast */
+.toast-container .Toastify__toast {
+  border-radius: 6px;
+  padding: 10px 15px;
+}
+.toast-container .Toastify__toast--error {
+  background: #ff426c;
 }

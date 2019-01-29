@@ -1,0 +1,18 @@
+.dashboard .topbar {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 290px;
+  bottom: auto;
+  width: calc(100% - 290px);
+  height: 60px;
+  background-color: blue;
+}
+@media(max-width: 991px) {
+  .dashboard .topbar {
+    height: 50px;
+    width: 100%;
+    left: 0;
+  }
+}

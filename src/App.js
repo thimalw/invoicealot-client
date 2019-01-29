@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ProtectedRoute from './ProtectedRoute';
+import Login from './components/Auth/Login';
+import Logout from './components/Auth/Logout';
+import Signup from './components/Auth/Signup';
+import Statistics from './components/Statistics';
+import './IconLibrary';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+
+const ToastCloseButton = ({ props, closeToast }) => (
+  <FontAwesomeIcon icon="times" onClick={closeToast} />
+);
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <ToastContainer
+          className='toast-container'
+          closeButton={<ToastCloseButton />}
+        />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/signup" component={Signup} />
+          <ProtectedRoute exact path="/statistics" component={Statistics} />
+        </Switch>
       </div>
     );
   }
