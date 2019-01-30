@@ -16,7 +16,8 @@
   width: 290px;
   max-width: calc(100% - 40px);
   height: 100vh;
-  background-color: red;
+  background-color: #fff;
+  border-right: 1px solid #DDDDDD;
 }
 @media(max-width: 991px) {
   .dashboard .sidebar-container {
@@ -44,4 +45,14 @@
     left: 0;
     transition: left 250ms ease;
   }
+}
+
+/* logo */
+.dashboard .sidebar .sidebar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  height: 120px;
+  border-bottom: 1px solid #eee;
 }

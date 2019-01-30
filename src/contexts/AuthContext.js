@@ -8,7 +8,9 @@ class AuthProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: localStorage.hasOwnProperty('_apitoken')
+      isLoggedIn: localStorage.hasOwnProperty('_apitoken'),
+      organizations: [],
+      organization: {}
     };
   }
 
@@ -22,11 +24,17 @@ class AuthProvider extends Component {
     try {
       const res = await AuthAPI.login(email, password);
       const apitoken = res.data.data.token;
-
       localStorage.setItem('_apitoken', apitoken);
 
+      if (res.data.data.organizations.length) {
+        if (!localStorage.hasOwnProperty('organizationId') || !this.selectOrganization(localStorage.getItem('organizationId'))) {
+          this.selectOrganization(res.data.data.organizations[0].id);
+        }
+      }
+
       this.setState({
-        isLoggedIn: true
+        isLoggedIn: true,
+        organizations: res.data.data.organizations
       });
 
       return res;
@@ -44,8 +52,9 @@ class AuthProvider extends Component {
     });
   };
 
+  selectOrganization = async (organizationId) => {};
+
   render() {
-    console.log(this.state.isLoggedIn);
     return (
       <AuthContext.Provider
         value={{

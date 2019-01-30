@@ -6,7 +6,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Login from './components/Auth/Login';
 import Logout from './components/Auth/Logout';
 import Signup from './components/Auth/Signup';
-import Statistics from './components/Statistics';
+import Overview from './components/Overview';
 import './IconLibrary';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -27,7 +27,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/signup" component={Signup} />
-          <ProtectedRoute exact path="/statistics" component={Statistics} />
+          <ProtectedRoute exact path="/overview" component={Overview} />
         </Switch>
       </div>
     );

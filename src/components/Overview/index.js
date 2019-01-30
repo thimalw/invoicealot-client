@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Dashboard from '../Dashboard';
-import './Statistics.css';
+import './Overview.css';
 
-class Statistics extends Component {
+class Overview extends Component {
   render() {
     return (
       <Dashboard>
-        <div className="statistics">
+        <div className="overview">
           Test
         </div>
       </Dashboard>
@@ -14,4 +14,4 @@ class Statistics extends Component {
   }
 }
 
-export default Statistics;
+export default Overview;

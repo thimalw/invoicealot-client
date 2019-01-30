@@ -7,7 +7,8 @@
   bottom: auto;
   width: calc(100% - 290px);
   height: 60px;
-  background-color: blue;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
 }
 @media(max-width: 991px) {
   .dashboard .topbar {
