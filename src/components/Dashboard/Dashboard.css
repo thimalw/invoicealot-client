@@ -3,7 +3,7 @@
   position: relative;
 }
 .dashboard .dashboard-body {
-  position: relative;
+  position: absolute;
   top: 60px;
   left: 290px;
   width: calc(100% - 290px);
