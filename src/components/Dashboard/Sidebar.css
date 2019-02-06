@@ -4,10 +4,12 @@
   top: 0;
   left: 0;
   bottom: 0;
-  pointer-events: none;
 }
 .dashboard .sidebar {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -19,6 +21,9 @@
   background-color: #fff;
   border-right: 1px solid #DDDDDD;
 }
+.dashboard .sidebar .dropdown {
+  border-radius: 19px !important;
+}
 @media(max-width: 991px) {
   .dashboard .sidebar-container {
     z-index: 999;
@@ -29,6 +34,7 @@
     height: calc(100vh - 50px);
     top: 50px;
     transition: background-color 250ms ease;
+    pointer-events: none;
   }
   .dashboard.sidebar-active .sidebar-container {
     background-color: rgba(0,0,0,0.5);
@@ -48,11 +54,88 @@
 }
 
 /* logo */
-.dashboard .sidebar .sidebar-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.dashboard .sidebar .sidebar-company-logo {
+  text-align: center;
   padding: 15px;
-  height: 120px;
   border-bottom: 1px solid #eee;
+}
+.dashboard .sidebar .sidebar-company-logo img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-height: 80px;
+  max-width: 260px;
+  margin: 0 auto;
+}
+.dashboard .sidebar .sidebar-company-select {
+  padding: 15px;
+}
+.dashboard .sidebar .organizations-select-actions a,
+.dashboard .sidebar .organizations-select-actions a:visited {
+  display: block;
+  background-color: #f9f9f9;
+  padding: 10px 15px;
+  color: #aaa;
+  text-align: center;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+}
+
+/* footer */
+.dashboard .sidebar .sidebar-footer {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 15px;
+  color: #9d9d9d;
+  text-align: center;
+  font-size: 10px;
+  line-height: 1.3;
+  border-top: 1px solid #eee;
+}
+.dashboard .sidebar .sidebar-footer a,
+.dashboard .sidebar .sidebar-footer a:visited {
+  color: inherit;
+  text-decoration: underline;
+}
+.dashboard .sidebar .sidebar-footer a:hover,
+.dashboard .sidebar .sidebar-footer a:active {
+  color: #333;
+}
+.dashboard .sidebar .sidebar-footer-logo {
+  display: inline-block;
+  height: 15px;
+  width: auto;
+  margin-bottom: 3px;
+  opacity: 0.5;;
+}
+
+/* actions */
+.sidebar-actions {
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+/* nav */
+.dashboard .sidebar .sidebar-nav {
+  border-top: 1px solid #eee;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 1;
+}
+.dashboard .sidebar .sidebar-nav a,
+.dashboard .sidebar .sidebar-nav a:visited {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 17px;
+  background-color: transparent;
+  text-decoration: none !important;
+}
+.dashboard .sidebar .sidebar-nav a + a {
+  margin-top: 5px;
+}
+.dashboard .sidebar .sidebar-nav a:hover,
+.dashboard .sidebar .sidebar-nav a:active,
+.dashboard .sidebar .sidebar-nav a.active {
+  background-color: #f5f5f5;
+  text-decoration: none !important;
 }

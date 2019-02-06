@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import Dashboard from '../Dashboard';
 import './Overview.css';
+import { AuthConsumer } from '../../contexts/AuthContext';
 
-class Overview extends Component {
+class Overview extends Component {  
   render() {
     return (
-      <Dashboard>
-        <div className="overview">
-          Test
-        </div>
-      </Dashboard>
+      <AuthConsumer>
+        {({ organization }) => {
+          return (
+            <div className="overview">
+              <h1>{organization.name}</h1>
+            </div>
+          );
+        }}
+      </AuthConsumer>
     );
   }
 }

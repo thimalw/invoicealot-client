@@ -10,7 +10,6 @@ class AuthProvider extends Component {
     super(props);
     this.state = {
       isLoggedIn: localStorage.hasOwnProperty('_apitoken'),
-      showOrgCreateModal: false,
       organizations: [],
       organization: {}
     };
@@ -18,9 +17,6 @@ class AuthProvider extends Component {
 
   componentDidMount() {
     this.refreshState();
-    this.setState({
-      showOrgCreateModal: this.state.organizations.length ? false : true
-    });
   }
 
   refreshState = async () => {
