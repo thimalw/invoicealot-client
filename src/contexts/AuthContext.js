@@ -33,21 +33,23 @@ class AuthProvider extends Component {
     try {
       const res = await OrganizationAPI.list();
 
-      const organizations = [];
-      for (var organization of res.data.data.organizations) {
-        organizations.push({
-          label: organization.name,
-          value: organization.id,
-          image: {
-            avatar: true,
-            src: organization.logo ? organization.logo : 'https://react.semantic-ui.com/logo.png'
-          }
+      if (res.data.data.organizations.length) {
+        const organizations = [];
+        for (var organization of res.data.data.organizations) {
+          organizations.push({
+            label: organization.name,
+            value: organization.id,
+            image: {
+              avatar: true,
+              src: organization.logo ? organization.logo : 'https://react.semantic-ui.com/logo.png'
+            }
+          });
+        }
+
+        this.setState({
+          organizations
         });
       }
-
-      this.setState({
-        organizations
-      });
 
     } catch (err) {
       throw err;
@@ -55,18 +57,26 @@ class AuthProvider extends Component {
   };
 
   updateOrganization = async () => {
-    const organizationId = localStorage.hasOwnProperty('organizationId') ? localStorage.getItem('organizationId') : this.state.organizations[0].value;
+    let organizationId = null;
+    if (localStorage.hasOwnProperty('organizationId')) {
+      organizationId = localStorage.getItem('organizationId');
+    } else if (this.state.organizations.length) {
+      organizationId = this.state.organizations[0].value;
+    }
 
-    try {
-      const res = await OrganizationAPI.get(organizationId);
+    if (organizationId) {
+      console.log(organizationId);
+      try {
+        const res = await OrganizationAPI.get(organizationId);
 
-      if (res.data.data.organization) {
-        this.setState({
-          organization: res.data.data.organization
-        });
+        if (res.data.data.organization) {
+          this.setState({
+            organization: res.data.data.organization
+          });
+        }
+      } catch (err) {
+        throw err;
       }
-    } catch (err) {
-      throw err;
     }
   };
 
@@ -98,6 +108,7 @@ class AuthProvider extends Component {
 
   logout = () => {
     localStorage.removeItem('_apitoken');
+    localStorage.removeItem('organizationId');
 
     this.setState({
       isLoggedIn: false

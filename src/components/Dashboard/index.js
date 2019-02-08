@@ -6,6 +6,8 @@ import Topbar from './Topbar';
 import './Dashboard.css';
 import NotFound from './NotFound';
 import Overview from '../Overview';
+import Organizations from '../Organizations';
+import NewOrganization from '../Organizations/NewOrganization';
 
 class Dashboard extends Component {
   render() {
@@ -16,6 +18,8 @@ class Dashboard extends Component {
         <div className="dashboard-body">
           <Switch>
             <ProtectedRoute exact path="/" component={Overview} />
+            <ProtectedRoute exact path="/organizations" component={Organizations} />
+            <ProtectedRoute exact path="/organizations/new" component={NewOrganization} />
             <ProtectedRoute component={NotFound} />
           </Switch>
         </div>

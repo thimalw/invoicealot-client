@@ -14,12 +14,14 @@ class OrganizationSelect extends Component {
     control: (provided) => ({
       ...provided,
       fontSize: '14px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      lineHeight: '1'
     }),
     option: (provided) => ({
       ...provided,
       fontSize: '14px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      lineHeight: '1'
     }),
     menuList: (provided) => ({
       ...provided,
