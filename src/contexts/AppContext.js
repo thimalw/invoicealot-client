@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import { useToken } from '../api/api';
 import AuthAPI from '../api/auth.api';
 import OrganizationAPI from '../api/organization.api';
+import InvoiceApi from '../api/invoice.api';
+import { toast } from 'react-toastify';
 
-const AuthContext = React.createContext();
-const AuthConsumer = AuthContext.Consumer;
+const AppContext = React.createContext();
+const AppConsumer = AppContext.Consumer;
 
-class AuthProvider extends Component {
+class AppProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      initialized: false,
       isLoggedIn: localStorage.hasOwnProperty('_apitoken'),
       organizations: [],
       organization: {}
@@ -20,13 +24,32 @@ class AuthProvider extends Component {
   }
 
   refreshState = async () => {
-    await this.updateOrganizations();
-    await this.updateOrganization();
+    this.setState({
+      initialized: false
+    }, async () => {
+
+      if (this.state.isLoggedIn) {
+        await this.updateOrganizations();
+        await this.updateOrganization();
+      }
+
+      this.setState({
+        initialized: true
+      });
+    });
   };
 
   selectOrganization = async (organizationId) => {
-    localStorage.setItem('organizationId', organizationId);
-    await this.updateOrganization();
+    this.setState({
+      initialized: false
+    }, async () => {
+      localStorage.setItem('organizationId', organizationId);
+      await this.updateOrganization();
+
+      this.setState({
+        initialized: true
+      });
+    });
   };
 
   updateOrganizations = async () => {
@@ -52,7 +75,13 @@ class AuthProvider extends Component {
       }
 
     } catch (err) {
-      throw err;
+      if (err.response && err.response.data.message) {
+        toast.error(err.response.data.message);
+      } else if (err.response && err.response.statusText) {
+        toast.error(err.response.statusText);
+      } else {
+        throw err;
+      }
     }
   };
 
@@ -65,7 +94,6 @@ class AuthProvider extends Component {
     }
 
     if (organizationId) {
-      console.log(organizationId);
       try {
         const res = await OrganizationAPI.get(organizationId);
 
@@ -84,7 +112,8 @@ class AuthProvider extends Component {
     try {
       const res = await AuthAPI.login(email, password);
       const apitoken = res.data.data.token;
-      localStorage.setItem('_apitoken', apitoken);
+      await localStorage.setItem('_apitoken', apitoken);
+      useToken();
 
       if (res.data.data.organizations.length) {
         if (!localStorage.hasOwnProperty('organizationId') || !this.selectOrganization(localStorage.getItem('organizationId'))) {
@@ -115,26 +144,43 @@ class AuthProvider extends Component {
     });
   };
 
+  getInvoices = async () => {
+    try {
+      const res = await InvoiceApi.list(this.state.organization.id);
+
+      if (res.data.data.invoices) {
+        return res.data.data.invoices;
+      }
+
+      return [];
+    } catch (err) {
+      console.log(err);
+      throw err; // TODO: handle error
+    }
+  };
+
   render() {
     return (
-      <AuthContext.Provider
+      <AppContext.Provider
         value={{
+          initialized: this.state.initialized,
           isLoggedIn: this.state.isLoggedIn,
           login: this.login,
           logout: this.logout,
           selectOrganization: this.selectOrganization,
           organization: this.state.organization,
-          organizations: this.state.organizations
+          organizations: this.state.organizations,
+          getInvoices: this.getInvoices
         }}
       >
         {this.props.children}
-      </AuthContext.Provider>
+      </AppContext.Provider>
     );
   }
 }
 
-export default AuthContext;
+export default AppContext;
 export {
-  AuthProvider,
-  AuthConsumer
+  AppProvider,
+  AppConsumer
 };

@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import Auth from './Auth';
 import AuthAPI from '../../api/auth.api';
 import { errorsToJsx } from '../../api/apiUtils';
-import AuthContext, { AuthConsumer } from '../../contexts/AuthContext';
+import AppContext, { AppConsumer } from '../../contexts/AppContext';
 import { Redirect, Link } from 'react-router-dom';
 
 class Signup extends Component {
@@ -71,7 +71,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <AuthConsumer>
+      <AppConsumer>
         {({ isLoggedIn }) => {
           return isLoggedIn ? (
             <Redirect to="/" />
@@ -133,11 +133,11 @@ class Signup extends Component {
               </Auth>
             );
         }}
-      </AuthConsumer>
+      </AppConsumer>
     );
   }
 }
 
-Signup.contextType = AuthContext;
+Signup.contextType = AppContext;
 
 export default Signup;

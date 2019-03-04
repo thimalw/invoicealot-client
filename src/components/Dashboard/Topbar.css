@@ -1,6 +1,6 @@
 .dashboard .topbar {
   display: block;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 290px;
@@ -9,6 +9,7 @@
   height: 60px;
   background-color: #f4f4f4;
   border-bottom: 1px solid #ddd;
+  z-index: 900;
 }
 @media(max-width: 991px) {
   .dashboard .topbar {

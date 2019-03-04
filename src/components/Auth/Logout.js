@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import AppContext from '../../contexts/AppContext';
 
 class Logout extends Component {
   componentDidMount = () => {
@@ -14,6 +14,6 @@ class Logout extends Component {
   }
 }
 
-Logout.contextType = AuthContext;
+Logout.contextType = AppContext;
 
 export default Logout;

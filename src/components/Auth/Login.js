@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-toastify';
 import Auth from './Auth';
 import { errorsToJsx } from '../../api/apiUtils';
-import AuthContext, { AuthConsumer } from '../../contexts/AuthContext';
+import AppContext, { AppConsumer } from '../../contexts/AppContext';
 
 class Login extends Component {
   constructor(props) {
@@ -31,15 +31,21 @@ class Login extends Component {
         user.password
       );
 
-      return this.props.history.push('/');
+      if (this.context.organizations.length) {
+        return this.props.history.push('/');
+      } else {
+        return this.props.history.push('/organizations/new');
+      }
     } catch (err) {
-      if (typeof (err.response) !== 'undefined') {
-        const jsxErrors = errorsToJsx(err.response.data.data.errors);
-        this.setState({
-          formErrors: jsxErrors
-        });
-        toast.error(err.response.data.message);
-        actions.setErrors(jsxErrors);
+      if (err.response) {
+        if (err.response.data && err.response.data.data) {
+          const jsxErrors = errorsToJsx(err.response.data.data.errors);
+          this.setState({
+            formErrors: jsxErrors
+          });
+          toast.error(err.response.data.message);
+          actions.setErrors(jsxErrors);
+        }
       } else {
         toast.error('Unable to connect. Please try again later.');
       }
@@ -50,7 +56,7 @@ class Login extends Component {
 
   render() {
     return (
-      <AuthConsumer>
+      <AppConsumer>
         {({ isLoggedIn }) => {
           return isLoggedIn ? (
             <Redirect to="/" />
@@ -95,11 +101,11 @@ class Login extends Component {
               </Auth>
           );
         }}
-      </AuthConsumer>
+      </AppConsumer>
     );
   }
 }
 
-Login.contextType = AuthContext;
+Login.contextType = AppContext;
 
 export default Login;

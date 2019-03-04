@@ -39,6 +39,7 @@ class FormWizard extends Component {
     } else {
       bag.setTouched({});
       bag.setSubmitting(false);
+      console.log(values);
       this.next(values);
     }
   };

@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Sidebar.css';
-import AuthContext, { AuthConsumer } from '../../contexts/AuthContext';
+import { AppConsumer } from '../../contexts/AppContext';
 import logo from '../../assets/img/logo.svg';
 import OrganizationSelect from './OrganizationSelect';
+import InvoiceApi from '../../api/invoice.api';
 
-class Sidebar extends Component {  
+class Sidebar extends Component {
+  handleNewInvoice = async (organizationId) => {
+    try {
+      const invoice = {
+        type: 'invoice'
+      };
+
+      const res = await InvoiceApi.create(invoice, organizationId);
+
+      if (res.data.data.invoice.id) {
+        this.props.history.push(`/invoices/${res.data.data.invoice.id}`);
+        return res.data.data.invoice.id;
+      } else if (res.data.data.errors && res.data.message) {
+        throw new Error(res.data.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+  
   render() {
     return (
-      <AuthConsumer>
+      <AppConsumer>
         {({ organization }) => {
           return (
             <div className="sidebar-container">
@@ -22,29 +43,38 @@ class Sidebar extends Component {
                 <div className="sidebar-company-select">
                   <OrganizationSelect />
                 </div>
-                <div className="sidebar-actions">
-                  <div className="auth-form-btn btn-row btn-dual">
-                    <Link to="/invoices/new" className="btn btn-primary">
-                      <FontAwesomeIcon icon="plus" />
-                      Invoice
-                    </Link>
-                    <Link to="/estimates/new" className="btn btn-secondary">
-                      <FontAwesomeIcon icon="plus" />
-                      Estimate
-                    </Link>
+                {organization.id &&
+                  <div className="sidebar-actions">
+                    <div className="auth-form-btn btn-row btn-dual">
+                      <button
+                        onClick={() => {this.handleNewInvoice(organization.id)}}
+                        className="btn btn-primary"
+                      >
+                        <FontAwesomeIcon icon="plus" />
+                        Invoice
+                      </button>
+                      <Link to="/estimates/new" className="btn btn-secondary">
+                        <FontAwesomeIcon icon="plus" />
+                        Estimate
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="sidebar-nav">
-                  <NavLink activeClassName="active" exact={true} to="/">Overview</NavLink>
-                  <NavLink activeClassName="active" to="/invoices">Invoices</NavLink>
-                  <NavLink activeClassName="active" to="/estimates">Estimates</NavLink>
-                  <NavLink activeClassName="active" to="/products">Products</NavLink>
-                  <NavLink activeClassName="active" to="/customers">Customers</NavLink>
-                </div>
-                <div className="sidebar-nav">
-                  <NavLink activeClassName="active" exact={true} to="/organization/settings">Organization Settings</NavLink>
-                  <NavLink activeClassName="active" to="/organization/billing">Billing</NavLink>
-                </div>
+                }
+                {organization.id &&
+                  <div className="sidebar-nav">
+                    <NavLink activeClassName="active" exact={true} to="/">Overview</NavLink>
+                    <NavLink activeClassName="active" to="/invoices">Invoices</NavLink>
+                    <NavLink activeClassName="active" to="/estimates">Estimates</NavLink>
+                    <NavLink activeClassName="active" to="/products">Products</NavLink>
+                    <NavLink activeClassName="active" to="/customers">Customers</NavLink>
+                  </div>
+                }
+                {organization.id &&
+                  <div className="sidebar-nav">
+                    <NavLink activeClassName="active" exact={true} to="/organization/settings">Organization Settings</NavLink>
+                    <NavLink activeClassName="active" to="/organization/billing">Billing</NavLink>
+                  </div>
+                }
                 <footer className="sidebar-footer">
                   <img className="sidebar-footer-logo" src={logo} alt="Invoicealot" />
                   <div>Powered by Invoicealot</div>
@@ -54,11 +84,11 @@ class Sidebar extends Component {
             </div>
           );
         }}
-      </AuthConsumer>
+      </AppConsumer>
     );
   }
 }
 
-Sidebar.contextType = AuthContext;
+// Sidebar.contextType = AppContext;
 
-export default Sidebar;
+export default withRouter(Sidebar);

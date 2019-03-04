@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Select, { components } from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTooltip from 'react-tooltip'
-import AuthContext, { AuthConsumer } from '../../contexts/AuthContext';
+import AppContext, { AppConsumer } from '../../contexts/AppContext';
 
 class OrganizationSelect extends Component {
   handleOrganizationChange = (data) => {
@@ -20,14 +20,12 @@ class OrganizationSelect extends Component {
     option: (provided) => ({
       ...provided,
       fontSize: '14px',
-      cursor: 'pointer',
-      lineHeight: '1'
+      cursor: 'pointer'
     }),
     menuList: (provided) => ({
       ...provided,
       paddingTop: '0',
       paddingBottom: '0',
-      overflow: 'hidden',
       borderRadius: '4px'
     })
   };
@@ -48,7 +46,7 @@ class OrganizationSelect extends Component {
 
   render() {
     return (
-      <AuthConsumer>
+      <AppConsumer>
         {({organization, organizations}) => {
           return (
             <Select
@@ -75,11 +73,11 @@ class OrganizationSelect extends Component {
             />
           );
         }}
-      </AuthConsumer>
+      </AppConsumer>
     );
   }
 }
 
-OrganizationSelect.contextType = AuthContext;
+OrganizationSelect.contextType = AppContext;
 
 export default OrganizationSelect;

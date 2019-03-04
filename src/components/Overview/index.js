@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './Overview.css';
-import { AuthConsumer } from '../../contexts/AuthContext';
+import { AppConsumer } from '../../contexts/AppContext';
 
 class Overview extends Component {  
   render() {
     return (
-      <AuthConsumer>
+      <AppConsumer>
         {({ organization }) => {
           return (
             <div className="overview">
@@ -13,7 +13,7 @@ class Overview extends Component {
             </div>
           );
         }}
-      </AuthConsumer>
+      </AppConsumer>
     );
   }
 }

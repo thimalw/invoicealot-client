@@ -1,0 +1,35 @@
+.organization-select-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  /* align-items: stretch; */
+}
+.organization-select-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 15px;
+}
+.organization-select-container input[type=radio] {
+  display: none !important;
+}
+.organization-select-card {
+  display: block;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+}
+.organization-select-container input[type=radio]:checked + .organization-select-card {
+  border-color: #000;
+  box-shadow: 0 0 0 1px #000;
+}
+.organization-select-container .organization-name {
+  display: block;
+  text-align: center;
+}
+.organization-select-container .organization-price {
+  display: block;
+  text-align: center;
+}

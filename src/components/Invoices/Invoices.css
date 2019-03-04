@@ -1,0 +1,24 @@
+.invoice-list-item {
+  display: block;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.invoice-list-item + .invoice-list-item {
+  margin-top: 15px;
+}
+.invoice-list-item .invoice-item-body {
+  text-decoration: none !important;
+}
+.invoice-list-item .invoice-item-body .col {
+  margin: 15px;
+}
+.invoice-list-item .invoice-item-body .label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.invoice-list-item .invoice-item-body .value {
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
