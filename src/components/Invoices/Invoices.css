@@ -3,6 +3,7 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
+  overflow: hidden;
 }
 .invoice-list-item + .invoice-list-item {
   margin-top: 15px;
@@ -21,4 +22,34 @@
   font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
+}
+.invoice-list-item .invoice-item-actions {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #eee;
+}
+.invoice-list-item .invoice-item-actions .actions-col-right {
+  margin-left: auto;
+  margin-right: 0;
+  border-left: 1px solid #eee;
+}
+.invoice-list-item .invoice-item-actions .invoice-item-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 44px;
+  height: 44px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #B7B7B7;
+  outline: none !important;
+}
+.invoice-list-item .invoice-item-actions .invoice-item-btn:hover {
+  color: #000;
+}
+.invoice-list-item .invoice-item-actions .invoice-item-btn-danger:hover {
+  color: #ff426c;
 }

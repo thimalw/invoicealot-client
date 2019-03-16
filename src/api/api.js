@@ -27,7 +27,7 @@ api.interceptors.response.use(
   },
   error => {
     if (error.response && (error.response.status === '401' || error.response.status === 401)) {
-      history.push('/logout');
+      return history.push('/logout');
     }
     return Promise.reject(error)
   }

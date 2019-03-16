@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
 
 class Logout extends Component {
-  componentDidMount = () => {
-    this.context.logout();
+  componentDidMount = async () => {
+    await this.context.logout();
     this.props.history.push('/login');
   }
 

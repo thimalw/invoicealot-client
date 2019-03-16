@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Invoices.css';
 import AppContext from '../../contexts/AppContext';
 import InvoiceApi from '../../api/invoice.api';
+import Confirm from '../../utils/Confirm';
+import { toast } from 'react-toastify';
 
 class Invoices extends Component {
   constructor(props) {
@@ -15,6 +18,44 @@ class Invoices extends Component {
   componentDidMount() {
     this.loadInvoices();
   }
+
+  handleDestroyInvoice = async (invoiceId) => {
+    const invoices = this.state.invoices;
+    const invoiceIndex = invoices.findIndex(invoice => invoice.id === invoiceId);
+    const invoiceNumber = invoices[invoiceIndex].number;
+
+    Confirm({
+      title: 'Please confirm',
+      message: `Are you sure you want to delete invoice #${invoiceNumber}?`,
+      buttons: [
+        {
+          label: 'Delete',
+          className: 'btn btn-danger',
+          onClick: async () => {
+            try {
+              const res = await InvoiceApi.destroy(this.context.organization.id, invoiceId);
+              if (res.status === 200) {
+                invoices.splice(invoiceIndex, 1);
+
+                this.setState({
+                  invoices
+                });
+
+                toast.success(`Deleted invoice #${invoiceNumber}`);
+              }
+            } catch (err) {
+              toast.error(err.message);
+              throw err;
+            }
+          }
+        },
+        {
+          label: 'Cancel',
+          onClick: false
+        }
+      ]
+    });
+  };
 
   loadInvoices = async () => {
     try {
@@ -60,7 +101,17 @@ class Invoices extends Component {
                   </div>
                 </Link>
                 <div className="invoice-item-actions">
-
+                  <div className="actions-col">
+                    Status
+                  </div>
+                  <div className="actions-col actions-col-right">
+                    <button
+                      onClick={() => { this.handleDestroyInvoice(invoice.id) }}
+                      className="invoice-item-btn invoice-item-btn-danger"
+                    >
+                      <FontAwesomeIcon icon="trash-alt" />
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

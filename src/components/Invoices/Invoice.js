@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import './Invoice.css';
-import AppContext from '../../contexts/AppContext';
+import AppContext, { AppConsumer } from '../../contexts/AppContext';
 import InvoiceApi from '../../api/invoice.api';
 import InvoiceEditor from './InvoiceEditor';
 
@@ -34,17 +34,28 @@ class Invoice extends Component {
   
   render() {
     return (
-      <div className="invoice">
-        <div className="container">
-          {!this.state.initialized &&
-            <div>Loading</div>
-          }
+      <AppConsumer>
+        {({ organization }) => {
+          return (
+            <div className="invoice">
+              <div className="container">
+                {!this.state.initialized &&
+                  <div>Loading</div>
+                }
 
-          {this.state.initialized &&
-            <div className="invoice-content"></div>
-          }
-        </div>
-      </div>
+                {this.state.initialized &&
+                  <div className="invoice-content">
+                    <InvoiceEditor
+                      invoice={this.state.invoice}
+                      organization={organization}
+                    />
+                  </div>
+                }
+              </div>
+            </div>
+          );
+        }}
+      </AppConsumer>
     );
   }
 }

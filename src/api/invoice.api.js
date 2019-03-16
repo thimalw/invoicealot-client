@@ -12,8 +12,13 @@ const get = async (organizationId, invoiceId) => {
   return await api.get(`/organizations/${organizationId}/invoices/${invoiceId}`);
 };
 
+const destroy = async (organizationId, invoiceId) => {
+  return await api.delete(`/organizations/${organizationId}/invoices/${invoiceId}`);
+};
+
 export default {
   create,
   list,
-  get
+  get,
+  destroy
 }

@@ -1,0 +1,23 @@
+.confirm-alert {
+  background-color: #fff;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 20px 20px -14px rgba(0,0,0,0.1);
+}
+.confirm-alert .confirm-alert-body {
+  padding: 15px;
+}
+.confirm-alert .confirm-title {
+  margin-top: 0;
+  font-size: 24px;
+  text-transform: capitalize;
+}
+.confirm-alert .confirm-message {
+  margin-bottom: 0;
+}
+.confirm-alert .confirm-alert-actions {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  text-align: right;
+}

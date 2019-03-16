@@ -150,6 +150,10 @@ p {
   border-color: #888888;
   color: #888888 !important;
 }
+.btn-danger {
+  border-color: #eb0f21;
+  color: #eb0f21 !important;
+}
 
 /* alerts */
 .alert {
@@ -172,11 +176,20 @@ p {
 .toast-container .Toastify__toast--error {
   background: #ff426c;
 }
+.toast-container .Toastify__toast--success {
+  background: #05c283;
+}
+
+/* react-confirm */
+.react-confirm-alert-overlay {
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1001;
+}
 
 /* forms */
 .dashboard form {
   display: block;
-  margin: 30px 0;
+  margin: 0;
 }
 .form-group {
   display: block;
@@ -217,7 +230,7 @@ p {
   display: block;
   width: 100%;
   border: 1px solid #ccc;
-  background-color: rgba(0,0,0,0.025);
+  background-color: rgba(0,0,0,0);
   font-family: inherit;
   font-size: 16px;
   border-radius: 4px;

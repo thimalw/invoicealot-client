@@ -3,7 +3,7 @@ import { Field, ErrorMessage } from 'formik';
 import { toast } from 'react-toastify';
 import './NewOrganization.css';
 import AppContext, { AppConsumer } from '../../contexts/AppContext';
-import FormWizard from '../Parts/FormWizard';
+import FormWizard from '../Includes/FormWizard';
 import { errorsToJsx } from '../../api/apiUtils';
 import OrganizationApi from '../../api/organization.api';
 

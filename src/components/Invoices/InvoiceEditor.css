@@ -1,0 +1,41 @@
+.invoice-editor .invoice-body {
+  background-color: #fff;
+  padding: 30px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.invoice-editor .invoice-header {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+.invoice-editor .invoice-body .invoice-type {
+  text-transform: uppercase;
+  font-size: 28px;
+}
+.invoice-editor .invoice-body .invoice-organization {
+  margin: 15px 0;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+.invoice-editor .invoice-details-form .form-group {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  line-height: 1;
+  border: 0;
+  padding: 0;
+}
+.invoice-editor .invoice-details-form .form-group {
+  margin: 0 0 10px 0;
+}
+.invoice-editor .invoice-details-form label {
+  min-width: 150px;
+  text-align: right;
+  margin-right: 15px;
+}
+.invoice-editor .invoice-details-form input,
+.invoice-editor .invoice-details-form textarea {
+  margin: 0 !important;
+}

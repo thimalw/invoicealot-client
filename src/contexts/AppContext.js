@@ -80,6 +80,7 @@ class AppProvider extends Component {
       } else if (err.response && err.response.statusText) {
         toast.error(err.response.statusText);
       } else {
+        toast.error('Something went wrong. Please try again.');
         throw err;
       }
     }
@@ -103,6 +104,7 @@ class AppProvider extends Component {
           });
         }
       } catch (err) {
+        toast.error('Something went wrong. Please try again.');
         throw err;
       }
     }
