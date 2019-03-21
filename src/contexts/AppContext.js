@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { useToken } from '../api/api';
 import AuthAPI from '../api/auth.api';
 import OrganizationAPI from '../api/organization.api';
-import InvoiceApi from '../api/invoice.api';
 import { toast } from 'react-toastify';
 
 const AppContext = React.createContext();
@@ -23,6 +22,9 @@ class AppProvider extends Component {
     this.refreshState();
   }
 
+  /*
+   * Load all user and organization data
+   */
   refreshState = async () => {
     this.setState({
       initialized: false
@@ -39,6 +41,9 @@ class AppProvider extends Component {
     });
   };
 
+  /*
+   * Change the selected organization
+   */
   selectOrganization = async (organizationId) => {
     this.setState({
       initialized: false
@@ -52,6 +57,9 @@ class AppProvider extends Component {
     });
   };
 
+  /*
+   * Load organization list from server
+   */
   updateOrganizations = async () => {
     try {
       const res = await OrganizationAPI.list();
@@ -86,6 +94,9 @@ class AppProvider extends Component {
     }
   };
 
+  /*
+   * Load selected organization data from server
+   */
   updateOrganization = async () => {
     let organizationId = null;
     if (localStorage.hasOwnProperty('organizationId')) {
@@ -110,6 +121,9 @@ class AppProvider extends Component {
     }
   };
 
+  /*
+   * Authenticate with the server and store the access token locally
+   */
   login = async (email, password) => {
     try {
       const res = await AuthAPI.login(email, password);
@@ -137,6 +151,9 @@ class AppProvider extends Component {
     }
   };
 
+  /*
+   * Remove all authentication data stored locally
+   */
   logout = () => {
     localStorage.removeItem('_apitoken');
     localStorage.removeItem('organizationId');
@@ -144,21 +161,6 @@ class AppProvider extends Component {
     this.setState({
       isLoggedIn: false
     });
-  };
-
-  getInvoices = async () => {
-    try {
-      const res = await InvoiceApi.list(this.state.organization.id);
-
-      if (res.data.data.invoices) {
-        return res.data.data.invoices;
-      }
-
-      return [];
-    } catch (err) {
-      console.log(err);
-      throw err; // TODO: handle error
-    }
   };
 
   render() {
