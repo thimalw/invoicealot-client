@@ -1,5 +1,8 @@
 import React from 'react';
 
+/*
+ * Generate JSX elements from API error array
+ */
 const errorsToJsx = errors => {
   let fieldErrors = {};
   for (let fieldName in errors) {

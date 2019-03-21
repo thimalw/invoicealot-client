@@ -24,7 +24,13 @@ class Login extends Component {
       .required('Password is required')
   });
 
-  onSubmit = async (user, actions) => {
+  /*
+   * Authenticate with the server.
+   * 
+   * If success and has organizations, display default screen. If the user
+   * doesn't have any organizations, display create organization screen.
+   */
+  handleLogin = async (user, actions) => {
     try {
       await this.context.login(
         user.email,
@@ -68,7 +74,7 @@ class Login extends Component {
                     password: ''
                   }}
                   validationSchema={this.loginSchema}
-                  onSubmit={this.onSubmit}
+                  onSubmit={this.handleLogin}
                 >
                   {(errors, touched, isSubmitting) => (
                     <Form>

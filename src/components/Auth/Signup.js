@@ -38,7 +38,10 @@ class Signup extends Component {
       .required('Password confirmation is required.')
   });
 
-  onSubmit = async (user, actions) => {
+  /*
+   * Register the user on the server
+   */
+  handleSignup = async (user, actions) => {
     try {
       await AuthAPI.signup(user);
 
@@ -88,7 +91,7 @@ class Signup extends Component {
                     passwordConfirm: ''
                   }}
                   validationSchema={this.signupSchema}
-                  onSubmit={this.onSubmit}
+                  onSubmit={this.handleSignup}
                 >
                   {(errors, touched, isSubmitting) => (
                     <Form>

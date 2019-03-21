@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { history } from '../Router';
 
-axios.defaults.baseURL = 'http://localhost:3000/v1'; // TODO: get from env var
+axios.defaults.baseURL = 'http://localhost:3000/v1'; // TODO: get from config
 
 var api = axios.create();
 
+/*
+ * Insert the token to all requests
+ */
 const useToken = () => {
   api.interceptors.request.use(
     config => {
@@ -15,12 +18,13 @@ const useToken = () => {
   );
 };
 
-// add token to all requests
 if (localStorage.hasOwnProperty('_apitoken')) {
   useToken();
 }
 
-// logout if 401
+/*
+ * Trigger log out if the API returns a status of 401
+ */
 api.interceptors.response.use(
   config => {
     return config;
