@@ -7,6 +7,9 @@ import { toast } from 'react-toastify';
 const AppContext = React.createContext();
 const AppConsumer = AppContext.Consumer;
 
+/**
+ * App state provider
+ */
 class AppProvider extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +25,11 @@ class AppProvider extends Component {
     this.refreshState();
   }
 
-  /*
+  /**
    * Load all user and organization data
+   * 
+   * @function
+   * @async
    */
   refreshState = async () => {
     this.setState({
@@ -41,8 +47,12 @@ class AppProvider extends Component {
     });
   };
 
-  /*
+  /**
    * Change the selected organization
+   * 
+   * @function
+   * @async
+   * @param {int} organizationId - ID of the organization to select
    */
   selectOrganization = async (organizationId) => {
     this.setState({
@@ -57,8 +67,11 @@ class AppProvider extends Component {
     });
   };
 
-  /*
+  /**
    * Load organization list from server
+   *
+   * @function
+   * @async
    */
   updateOrganizations = async () => {
     try {
@@ -94,8 +107,11 @@ class AppProvider extends Component {
     }
   };
 
-  /*
+  /**
    * Load selected organization data from server
+   *
+   * @function
+   * @async
    */
   updateOrganization = async () => {
     let organizationId = null;
@@ -121,8 +137,14 @@ class AppProvider extends Component {
     }
   };
 
-  /*
-   * Authenticate with the server and store the access token locally
+  /**
+   * Authenticate with the server and store the access token
+   * locally
+   *
+   * @function
+   * @async
+   * @param {string} email - Email address of the user
+   * @param {string} password - Password of the user
    */
   login = async (email, password) => {
     try {
@@ -151,8 +173,10 @@ class AppProvider extends Component {
     }
   };
 
-  /*
+  /**
    * Remove all authentication data stored locally
+   *
+   * @function
    */
   logout = () => {
     localStorage.removeItem('_apitoken');

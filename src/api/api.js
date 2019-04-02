@@ -5,8 +5,10 @@ axios.defaults.baseURL = 'http://localhost:3000/v1'; // TODO: get from config
 
 var api = axios.create();
 
-/*
+/**
  * Insert the token to all requests
+ * 
+ * @function
  */
 const useToken = () => {
   api.interceptors.request.use(
@@ -22,7 +24,7 @@ if (localStorage.hasOwnProperty('_apitoken')) {
   useToken();
 }
 
-/*
+/**
  * Trigger log out if the API returns a status of 401
  */
 api.interceptors.response.use(

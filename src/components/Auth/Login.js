@@ -24,7 +24,7 @@ class Login extends Component {
       .required('Password is required')
   });
 
-  /*
+  /**
    * Authenticate with the server.
    * 
    * If success and has organizations, display default screen. If the user

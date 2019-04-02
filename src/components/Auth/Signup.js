@@ -38,8 +38,11 @@ class Signup extends Component {
       .required('Password confirmation is required.')
   });
 
-  /*
+  /**
    * Register the user on the server
+   * 
+   * @param {Object} user New user data
+   * @param {Object} actions Formik actions object
    */
   handleSignup = async (user, actions) => {
     try {
