@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, ErrorMessage } from 'formik';
+import { Field } from 'formik';
 import { toast } from 'react-toastify';
 import './NewOrganization.css';
 import AppContext, { AppConsumer } from '../../contexts/AppContext';
